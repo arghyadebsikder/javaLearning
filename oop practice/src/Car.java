@@ -8,11 +8,31 @@ public class Car {
     boolean isOpen = false;
     boolean isBelt = false;
     boolean isStart = false;
+    boolean isInside = false;
 
+    void getIn(){
+        if(isInside) System.out.println("You are already inside the car");
+        else if(!isOpen) System.out.println("Please open the door before getting in");
+        else{
+            isInside = true;
+            System.out.println("You are now inside the car");
+        }
+    }
+
+    void exit(){
+        if(isDriving) System.out.println("Please stop driving before exiting the car");
+        else if(isStart) System.out.println("Please turn off the engine before exiting the car");
+        else if(isBelt) System.out.println("Please untie the seat belt before exiting the car");
+        else if(!isOpen) System.out.println("Please open the door before exiting the car");
+        else{
+            isInside = false;
+            System.out.println("You have successfully exited the car");
+        }
+    }
 
     void doorOpen(){
-        isOpen = true;
-        System.out.println("The door has been opened");
+        if(isBelt) System.out.println("Please untie the seat belt before opening the door");
+        else System.out.println("The door has been opened");
     }
 
     void doorClose(){
@@ -21,8 +41,12 @@ public class Car {
     }
 
     void tieBelt(){
-        isBelt = true;
-        System.out.println("Thank you for using seat belt");
+        if(!isInside) System.out.println("Please get in the car before fastening the seat belt");
+        else if(isOpen) System.out.println("Please close the door before fastening the seat belt");
+        else{
+            isBelt = true;
+            System.out.println("Thank you for using seat belt");
+        }
 
     }
 
@@ -32,7 +56,7 @@ public class Car {
     }
 
     void start(){
-        if(isDriving) System.out.println("You are already driving the car");
+        if(!isInside) System.out.println("Please get in the car first before staring the engine");
         else if(isStart) System.out.println("The car engine is already started");
         else if(isOpen) System.out.println("Please close the door before starting");
         else if(!isBelt) System.out.println("Please tie seat belt before starting the engine");
@@ -43,8 +67,12 @@ public class Car {
     }
 
     void stopEngine(){
-        isStart = false;
-        System.out.println("The car engine stopped");
+        if(isDriving){
+            System.out.println("Please stop driving before stopping the engine");
+        }else{
+            isStart = false;
+            System.out.println("The car engine stopped");
+        }
     }
 
     void drive(){

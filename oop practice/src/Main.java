@@ -4,17 +4,22 @@ public class Main {
 
     static void status(Car car){
 
-        if(car.isOpen) System.out.println("The car door is open. Press 1 to close the door");
-        else System.out.println("The car door is close. Press 1 to open the door");
+        if(car.isInside) System.out.println("You are inside the car. Press 1 to exit the car");
+        else System.out.println("You are not in the car. Press 1 to get in the car");
 
-        if(car.isBelt) System.out.println("Your seat belt is tied. Press 2 to untie");
-        else System.out.println("Your seat belt is not tied. Press 2 to tie");
+        if(car.isOpen) System.out.println("The car door is open. Press 2 to close the door");
+        else System.out.println("The car door is close. Press 2 to open the door");
 
-        if(car.isStart) System.out.println("The car engine is on. Press 3 to turn off");
-        else System.out.println("The car engine is off. Press 3 to turn on");
+        if(car.isBelt) System.out.println("Your seat belt is tied. Press 3 to untie");
+        else System.out.println("Your seat belt is not tied. Press 3 to tie");
 
-        if(car.isDriving) System.out.println("You are driving the car. Press 4 to stop driving");
-        else System.out.println("You are not driving the car. Press 4 to start driving");
+        if(car.isStart) System.out.println("The car engine is on. Press 4 to turn off");
+        else System.out.println("The car engine is off. Press 4 to turn on");
+
+        if(car.isDriving) System.out.println("You are driving the car. Press 5 to stop driving");
+        else System.out.println("You are not driving the car. Press 5 to start driving");
+
+        System.out.println("Press 6 to exit");
 
     }
 
@@ -33,26 +38,33 @@ public class Main {
 
             status(car);
 
-            System.out.print("Please enter your choice : ");
+            System.out.print("Please enter your choice: ");
 
             int choice = scanner.nextInt();
 
             System.out.print(">> ");
             switch(choice){
                 case 1 -> {
+                    if(car.isInside) car.exit();
+                    else car.getIn();
+                }case 2 -> {
                     if(car.isOpen) car.doorClose();
                     else car.doorOpen();
-                }case 2 -> {
+                }case 3 -> {
                     if(car.isBelt) car.unTieBelt();
                     else car.tieBelt();
-                }case 3 -> {
+                }case 4 -> {
                     if(car.isStart) car.stopEngine();
                     else car.start();
-                }case 4 -> {
+                }case 5 -> {
                     if(car.isDriving) car.stopDrive();
                     else car.drive();
-                }case 5 -> {
-                    System.exit(0);
+                }case 6 -> {
+                    if(car.isInside) System.out.println("Please get out of the car to exit");
+                    else{
+                        System.out.println("Exit successfully");
+                        System.exit(0);
+                    }
                 }
                 default -> System.out.println("Invalid choice. Please try again");
             }
