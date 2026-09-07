@@ -31,8 +31,12 @@ public class Car {
     }
 
     void doorOpen(){
-        if(isBelt) System.out.println("Please untie the seat belt before opening the door");
-        else System.out.println("The door has been opened");
+        if(isStart) System.out.println("You can't open the door when engine is on");
+        else if(isBelt) System.out.println("Please untie the seat belt before opening the door");
+        else{
+            isOpen = true;
+            System.out.println("The door has been opened");
+        }
     }
 
     void doorClose(){
@@ -51,8 +55,12 @@ public class Car {
     }
 
     void unTieBelt(){
-        isBelt = false;
-        System.out.println("Your seat belt is untied");
+        if(isStart) System.out.println("Please stop the engine before untie the seat belt");
+        else{
+            isBelt = false;
+            System.out.println("Your seat belt is untied");
+        }
+
     }
 
     void start(){
@@ -62,7 +70,7 @@ public class Car {
         else if(!isBelt) System.out.println("Please tie seat belt before starting the engine");
         else{
             isStart = true;
-            System.out.println("Please drive with caution. Happy ride :)");
+            System.out.println("Engine turned on. Please drive with caution. Happy ride :)");
         }
     }
 

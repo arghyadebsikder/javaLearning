@@ -4,11 +4,11 @@ public class Main {
 
     static void status(Car car){
 
-        if(car.isInside) System.out.println("You are inside the car. Press 1 to exit the car");
-        else System.out.println("You are not in the car. Press 1 to get in the car");
+        if(car.isOpen) System.out.println("The car door is open. Press 1 to close the door");
+        else System.out.println("The car door is close. Press 1 to open the door");
 
-        if(car.isOpen) System.out.println("The car door is open. Press 2 to close the door");
-        else System.out.println("The car door is close. Press 2 to open the door");
+        if(car.isInside) System.out.println("You are inside the car. Press 2 to exit the car");
+        else System.out.println("You are not in the car. Press 2 to get in the car");
 
         if(car.isBelt) System.out.println("Your seat belt is tied. Press 3 to untie");
         else System.out.println("Your seat belt is not tied. Press 3 to tie");
@@ -45,11 +45,11 @@ public class Main {
             System.out.print(">> ");
             switch(choice){
                 case 1 -> {
-                    if(car.isInside) car.exit();
-                    else car.getIn();
-                }case 2 -> {
                     if(car.isOpen) car.doorClose();
                     else car.doorOpen();
+                }case 2 -> {
+                    if(car.isInside) car.exit();
+                    else car.getIn();
                 }case 3 -> {
                     if(car.isBelt) car.unTieBelt();
                     else car.tieBelt();
@@ -61,8 +61,9 @@ public class Main {
                     else car.drive();
                 }case 6 -> {
                     if(car.isInside) System.out.println("Please get out of the car to exit");
+                    else if(car.isOpen) System.out.println("Please close the door before exit");
                     else{
-                        System.out.println("Exit successfully");
+                        System.out.println("Exit successfully. Thank you :)");
                         System.exit(0);
                     }
                 }
